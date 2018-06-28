@@ -14,6 +14,11 @@ public class ApiResponse {
         return new ApiResponse(code,message,null);
     }
 
+    public static ApiResponse error(Integer code,String message) {
+        return new ApiResponse(code,message,null);
+    }
+
+
     public Integer getCode() {
         return code;
     }
