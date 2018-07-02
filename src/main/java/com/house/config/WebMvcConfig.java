@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -33,6 +34,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
     public SpringResourceTemplateResolver springResourceTeplateResolver(){
         SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
         springResourceTemplateResolver.setApplicationContext(this.applicationContext);
+        springResourceTemplateResolver.setCharacterEncoding("UTF-8");
+
         return springResourceTemplateResolver;
     }
 
@@ -45,6 +48,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
         SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
         springTemplateEngine.setTemplateResolver(springResourceTeplateResolver());
         springTemplateEngine.setEnableSpringELCompiler(true);
+
+        //配置thymeleaf支持SpringSecurity方言
+        SpringSecurityDialect springSecurityDialect = new SpringSecurityDialect();
+        springTemplateEngine.setDialect(springSecurityDialect);
+
         return springTemplateEngine;
     }
 
@@ -56,6 +64,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
     public ThymeleafViewResolver thymeleafViewResolver(){
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(springTemplateEngine());
+        thymeleafViewResolver.setCharacterEncoding("UTF-8");
         return thymeleafViewResolver;
     }
 }
