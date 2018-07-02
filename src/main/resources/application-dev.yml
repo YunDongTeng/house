@@ -12,3 +12,4 @@ spring:
     prefix: classpath:/templates/
     mode: HTML
     encoding: UTF-8
+    content-type: text/html

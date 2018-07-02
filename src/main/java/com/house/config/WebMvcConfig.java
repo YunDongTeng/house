@@ -49,6 +49,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
         springTemplateEngine.setTemplateResolver(springResourceTeplateResolver());
         springTemplateEngine.setEnableSpringELCompiler(true);
 
+
         //配置thymeleaf支持SpringSecurity方言
         SpringSecurityDialect springSecurityDialect = new SpringSecurityDialect();
         springTemplateEngine.setDialect(springSecurityDialect);
